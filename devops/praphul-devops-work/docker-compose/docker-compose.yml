@@ -1,0 +1,90 @@
+version: '3'
+services:
+  app1:
+    image: 217233105762.dkr.ecr.eu-central-1.amazonaws.com/pxi/challenge/sandbox
+    ports:
+    - "172.31.39.243:8080:5000"
+    env_file:
+    - "${HOME}/airport_app.env"
+    depends_on:
+    - dopostgres
+    links:
+    - dopostgres
+    networks:
+    - back-tier
+
+  app2:
+    image: 217233105762.dkr.ecr.eu-central-1.amazonaws.com/pxi/challenge/sandbox
+    ports:
+    - "172.31.39.243:8081:5000"
+    env_file:
+    - "${HOME}/airport_app.env"
+    depends_on:
+    - dopostgres
+    links:
+    - dopostgres
+    networks:
+    - back-tier
+
+  app3:
+    image: 217233105762.dkr.ecr.eu-central-1.amazonaws.com/pxi/challenge/sandbox
+    ports:
+    - "172.31.39.243:8082:5000"
+    env_file:
+    - "${HOME}/airport_app.env"
+    depends_on:
+    - dopostgres
+    links:
+    - dopostgres
+    networks:
+    - back-tier
+
+  dopostgres:
+    image: postgres
+    ports:
+    - "172.31.39.243:5432:5432"
+    env_file:
+    - "${HOME}/db.env"
+    volumes:
+    - postgresdbdata:/var/lib/postgresql/data
+    - "${HOME}/initialprovisioning:/initialprovisioning"
+    networks:
+    - back-tier
+
+  dopgadmin:
+    image: dpage/pgadmin4
+    ports:
+    - "172.31.39.243:5050:80"
+    environment:
+    - PGADMIN_DEFAULT_EMAIL=praphulkumardubey31@gmail.com
+    - PGADMIN_DEFAULT_PASSWORD=postgres
+    volumes:
+    - pgadmindbdata:/var/lib/pgadmin
+    links:
+    - dopostgres
+    networks:
+    - back-tier
+
+  nginx:
+    image: nginx
+    ports:
+    - "0.0.0.0:80:80"
+    - "0.0.0.0:443:443"
+    volumes:
+    - "${HOME}/nginx/sites-avaliable:/etc/nginx/conf.d"
+    - "${HOME}/nginx/ssl:/etc/nginx/ssl"
+    - "${HOME}/nginx/nginx.conf:/etc/nginx/nginx.conf"
+    links:
+    - app1
+    - app2
+    - app3
+    - dopgadmin
+    networks:
+    - front-tier
+
+volumes:
+  postgresdbdata:
+  pgadmindbdata:
+networks:
+  front-tier:
+  back-tier:

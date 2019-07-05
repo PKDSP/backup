@@ -1,0 +1,11 @@
+aws_region 	             = "us-west-2"
+aws_access_key 		     = "AKIAJPYFD6RH2CSWJNCA"
+aws_secret_key 		     = "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"
+aws_ami 		         = "ami-0d773a3b7bb2bb1c1"
+aws_vpc_cidr 		     = "10.0.0.0/16"
+aws_public_subnet_cidr   = "10.0.1.0/24"
+aws_private_subnet_cidr	 = "10.0.2.0/24"
+tags                     = {environment = "Airport Production"}
+aws_key_path             = "~/.ssh/do-auto-prov-key.pem"
+aws_key_name             = "do-auto-prov-key"
+pvtkey                   = "scripts/do-auto-prov-key.pem"

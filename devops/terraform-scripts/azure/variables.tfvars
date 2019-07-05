@@ -1,0 +1,13 @@
+subscription_id 	 = "00cc1463-f070-4167-ba62-f3bc9fd02642"
+client_id 		     = "d0769341-31f0-46c0-bf78-de097d18a865"
+client_secret 		 = "VdvXEGMZwbNkS8HxT7b8Z/d2k13W0aAdw7WtUlcRgoU="
+tenant_id 		     = "24b080cd-5874-44ab-9862-8d7e0e0781ab"
+location 		     = "East US"
+resource_group_name  = "TerraformGroup"
+virtual_network_name = "TerraformNetwork"
+vnet_cidr 		     = "192.168.0.0/16"
+subnet1_cidr 		 = "192.168.1.0/24"
+subnet2_cidr		 = "192.168.2.0/24"
+tags                 = {environment = "Terraform Demo"}
+vm_username 		 = "terraform"
+vm_password 		 = "windowsAdmin!0!"
